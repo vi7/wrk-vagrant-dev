@@ -10,6 +10,7 @@ packages:
 - epel-release repo
 - IUS repo https://centos7.iuscommunity.org/ius-release.rpm
 - vim-enhanced
-- git (IUS)
+- tmux2u (IUS)
+- git2u (IUS)
 - python36u/pip (IUS)
 - ansible (from pip)
