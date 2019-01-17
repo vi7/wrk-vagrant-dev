@@ -2,6 +2,7 @@
 # vi: set ft=ruby :
 
 VAGRANT_USER = 'vagrant'
+ENV["LC_ALL"] = "en_US.UTF-8"
 
 # All Vagrant configuration is done below. The "2" in Vagrant.configure
 # configures the configuration version (we support older styles for
@@ -11,7 +12,7 @@ Vagrant.configure("2") do |config|
   
   config.vm.box = "centos/7"
 
-  config.vm.hostname = "vagrant-" + `hostname`
+  config.vm.hostname = 'vagrant-' + ENV['USER']
   
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
