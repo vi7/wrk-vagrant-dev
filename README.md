@@ -5,6 +5,20 @@ Vagrant based local dev env
 
 ### TODO
 
+**repos:**
+- k8s:
+    ```sh
+    cat <<EOF > /etc/yum.repos.d/kubernetes.repo
+    [kubernetes]
+    name=Kubernetes
+    baseurl=https://packages.cloud.google.com/yum/repos/kubernetes-el7-x86_64
+    enabled=1
+    gpgcheck=1
+    repo_gpgcheck=1
+    gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
+    EOF
+    ```
+
 **packages:**
 
 - epel-release repo
@@ -14,6 +28,7 @@ Vagrant based local dev env
 - git2u (IUS)
 - python36u/pip (IUS)
 - ansible (from pip)
+- kubectl
 
 **puppet project:**
 
