@@ -23,7 +23,7 @@ Vagrant.configure("2") do |config|
   # config.vm.network "forwarded_port", guest: 80, host: 8080
   # config.vm.network "forwarded_port", guest: 80, host: 8080, host_ip: "127.0.0.1"
 
-  config.vm.network "private_network", ip: "192.168.100.10"
+  config.vm.network "private_network", ip: "192.168.200.20"
 
   config.vm.synced_folder ".", "/vagrant", disabled: true
   config.vm.synced_folder "share", "/home/#{VAGRANT_USER}/share", create: true

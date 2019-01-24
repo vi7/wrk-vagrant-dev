@@ -18,17 +18,34 @@ Vagrant based local dev env
     gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
     EOF
     ```
+- docker ce:
+    ```sh
+    yum-config-manager \
+    --add-repo \
+    https://download.docker.com/linux/centos/docker-ce.repo
+    ```
 
 **packages:**
 
 - epel-release repo
 - IUS repo https://centos7.iuscommunity.org/ius-release.rpm
+- yum-utils
 - vim-enhanced
 - tmux2u (IUS)
 - git2u (IUS)
 - python36u/pip (IUS)
 - ansible (from pip)
 - kubectl
+- helm (https://github.com/helm/helm/releases)
+- docker-ce
+
+**services:**
+
+- docker
+    ```sh
+    systemctl enable docker
+    systemctl start docker
+    ```
 
 **puppet project:**
 
