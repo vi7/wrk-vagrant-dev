@@ -38,6 +38,7 @@ Vagrant based local dev env
 - kubectl
 - helm (https://github.com/helm/helm/releases)
 - docker-ce
+- dig
 
 **services:**
 
