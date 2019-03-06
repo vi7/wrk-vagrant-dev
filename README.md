@@ -39,6 +39,14 @@ Vagrant based local dev env
 - helm (https://github.com/helm/helm/releases)
 - docker-ce
 - dig
+- unzip
+
+command:
+```sh
+yum -y install epel-release https://centos7.iuscommunity.org/ius-release.rpm
+yum -y install yum-utils vim-enhanced tmux2u git2u python36u python-pip kubectl docker-ce bind-utils
+pip install ansible==2.7.5
+```
 
 **services:**
 
