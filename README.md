@@ -40,11 +40,13 @@ Vagrant based local dev env
 - docker-ce
 - dig
 - unzip
+- traceroute
 
 command:
 ```sh
 yum -y install epel-release https://centos7.iuscommunity.org/ius-release.rpm
-yum -y install yum-utils vim-enhanced tmux2u git2u python36u python-pip kubectl docker-ce bind-utils
+yum -y install yum-utils vim-enhanced tmux2u git2u python36u python-pip bind-utils dig unzip traceroute
+yum -y install kubectl docker-ce
 pip install ansible==2.7.5
 ```
 
