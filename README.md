@@ -5,27 +5,29 @@ Vagrant based local dev env
 
 ### TODO
 
-**repos:**
-- k8s:
-    ```sh
-    cat <<EOF > /etc/yum.repos.d/kubernetes.repo
-    [kubernetes]
-    name=Kubernetes
-    baseurl=https://packages.cloud.google.com/yum/repos/kubernetes-el7-x86_64
-    enabled=1
-    gpgcheck=1
-    repo_gpgcheck=1
-    gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
-    EOF
-    ```
-- docker ce:
-    ```sh
-    yum-config-manager \
-    --add-repo \
-    https://download.docker.com/linux/centos/docker-ce.repo
-    ```
+**repos**
 
-**packages:**
+k8s
+```sh
+cat <<EOF > /etc/yum.repos.d/kubernetes.repo
+[kubernetes]
+name=Kubernetes
+baseurl=https://packages.cloud.google.com/yum/repos/kubernetes-el7-x86_64
+enabled=1
+gpgcheck=1
+repo_gpgcheck=1
+gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
+EOF
+```
+
+docker ce
+```sh
+yum-config-manager \
+--add-repo \
+https://download.docker.com/linux/centos/docker-ce.repo
+```
+
+**packages**
 
 - epel-release repo
 - IUS repo https://centos7.iuscommunity.org/ius-release.rpm
@@ -47,18 +49,39 @@ command:
 yum -y install epel-release https://centos7.iuscommunity.org/ius-release.rpm
 yum -y install yum-utils vim-enhanced tmux2u git2u python36u python-pip bind-utils dig unzip traceroute
 yum -y install kubectl docker-ce
-pip install ansible==2.7.5
+pip install ansible==2.8.2
 ```
 
-**services:**
+**configs**
 
-- docker
-    ```sh
-    systemctl enable docker
-    systemctl start docker
-    ```
+git completion and prompr for bashrc
 
-**puppet project:**
+```sh
+
+```
+
+kubectl completion for bashrc
+
+run:
+```sh
+kubectl completion bash > ~/.kube/completion.bash.inc
+```
+
+add to the `~/.bashrc`:
+```sh
+# Kubectl shell completion
+source ~/.kube/completion.bash.inc
+```
+
+**services**
+
+docker
+```sh
+systemctl enable docker
+systemctl start docker
+```
+
+**puppet project**
 
 - rfi repo IP at /etc/hosts:
 
@@ -126,7 +149,7 @@ pip install ansible==2.7.5
     ```
 
 - rfi repo:
-  
+
     ```
     [rfi]
     name=RFI repository for local RPM builds (tested, stable): CentOS$releasever ($basearch) Base                                                                       
@@ -170,4 +193,3 @@ pip install ansible==2.7.5
 
   - ?? add VM to the infradb: /opt/infradb4/db/sqlite.db
 - run standalone puppet: /opt/infradb4/puppet/code/environments/production/modules/rfi/files/standalone.sh
-
