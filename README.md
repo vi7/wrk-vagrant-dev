@@ -54,23 +54,32 @@ pip install ansible==2.8.2
 
 **configs**
 
-git completion and prompr for bashrc
+take those from helper-tools:
+- .bashrc
+- .bash_profile
+- .vimrc
+- .tmux.conf
+- .gitconfig
+
+git completion and prompt for bashrc
 
 ```sh
-
+curl -L https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash -o ~/.git-completion.bash
+curl -L https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh -o ~/.git-prompt.sh
 ```
 
-kubectl completion for bashrc
+kubectl and helm completion for bashrc
 
-run:
 ```sh
 kubectl completion bash > ~/.kube/completion.bash.inc
+helm completion bash > ~/.kube/helm-completion.bash.inc
 ```
-
-add to the `~/.bashrc`:
 ```sh
-# Kubectl shell completion
-source ~/.kube/completion.bash.inc
+# .bashrc
+...
+[[ -r ~/.kube/completion.bash.inc ]] && . ~/.kube/completion.bash.inc
+[[ -r ~/.kube/helm-completion.bash.inc  ]] && . ~/.kube/helm-completion.bash.inc
+...
 ```
 
 **services**
