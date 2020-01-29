@@ -34,7 +34,7 @@ Vagrant.configure("2") do |config|
     # vb.gui = true
   
     # Customize the amount of memory on the VM:
-    vb.memory = "2048"
+    vb.memory = "4096"
 
     # Make guest VM to use host's DNS resolver
     vb.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
