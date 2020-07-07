@@ -27,28 +27,17 @@ yum-config-manager \
 https://download.docker.com/linux/centos/docker-ce.repo
 ```
 
-**packages**
+**packages and utils**
 
-- epel-release repo
-- IUS repo https://centos7.iuscommunity.org/ius-release.rpm
-- yum-utils
-- vim-enhanced
-- tmux2u (IUS)
-- git2u (IUS)
-- python36u/pip (IUS)
-- ansible (from pip)
-- kubectl
 - helm (https://github.com/helm/helm/releases)
-- docker-ce
-- dig
-- unzip
-- traceroute
 
 command:
 ```sh
-yum -y install epel-release https://centos7.iuscommunity.org/ius-release.rpm
-yum -y install yum-utils vim-enhanced tmux2u git2u python36u python-pip bind-utils dig unzip traceroute
-yum -y install kubectl docker-ce
+yum -y install epel-release
+yum -y install https://repo.ius.io/ius-release-el7.rpm
+yum -y install yum-utils vim-enhanced tmux2u git222 python36 python36-pip bind-utils dig unzip traceroute
+yum -y install docker-ce docker-ce-cli containerd.io
+yum -y install kubectl
 pip install ansible==2.8.2
 ```
 
@@ -63,23 +52,17 @@ take those from helper-tools:
 
 git completion and prompt for bashrc
 
+replace Git ver with the proper one
+
 ```sh
-curl -L https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash -o ~/.git-completion.bash
-curl -L https://raw.githubusercontent.com/git/git/master/contrib/completion/git-prompt.sh -o ~/.git-prompt.sh
+curl -L https://raw.githubusercontent.com/git/git/v2.22.3/contrib/completion/git-prompt.sh -o ~/.git-prompt.sh
 ```
 
 kubectl and helm completion for bashrc
 
 ```sh
-kubectl completion bash > ~/.kube/completion.bash.inc
-helm completion bash > ~/.kube/helm-completion.bash.inc
-```
-```sh
-# .bashrc
-...
-[[ -r ~/.kube/completion.bash.inc ]] && . ~/.kube/completion.bash.inc
-[[ -r ~/.kube/helm-completion.bash.inc  ]] && . ~/.kube/helm-completion.bash.inc
-...
+kubectl completion bash >/etc/bash_completion.d/kubectl
+helm completion bash > /etc/bash_completion.d/helm
 ```
 
 **services**
@@ -92,113 +75,4 @@ systemctl start docker
 
 **puppet project**
 
-- rfi repo IP at /etc/hosts:
-
-    ```
-    172.22.4.57 repo repo.inw.rfiserve.net
-    ```
-
-- CentOS-Base:
-
-    ```
-    [base]
-    name=centos7 - Base
-    baseurl=http://repo/centos7-$basearch/RPMS.os/
-    gpgcheck=1
-    gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7
-    #exclude=*i?86*
-    enabled=1
-    metadata_expire=1h
-
-    [updates]
-    name=centos7 - Updates
-    baseurl=http://repo/centos7-$basearch/RPMS.updates/
-    gpgcheck=1
-    gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7
-    #exclude=*i?86*
-    enabled=1
-
-    #[addons]
-    #name=CentOS-7 - Addons
-    #baseurl=http://repo/centos7-$basearch/RPMS.addons/
-    #gpgcheck=1
-    #gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7
-    #exclude=*i?86*
-    #enabled=0
-    metadata_expire=1h
-
-    [extras]
-    name=centos7 - Extras
-    baseurl=http://repo/centos7-$basearch/RPMS.extras/
-    gpgcheck=1
-    gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7
-    #exclude=*i?86*
-    enabled=1
-    metadata_expire=1h
-
-    [centosplus]
-    name=centos7 - Plus
-    baseurl=http://repo/centos7-$basearch/RPMS.centosplus/
-    gpgcheck=1
-    gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7
-    #exclude=*i?86*
-    enabled=0
-    metadata_expire=1h
-    ```
-
-- epel
-
-    ```
-    [epel]
-    name=RFI EPEL repository mirror: CentOS$releasever ($basearch) Epel
-    enabled=1
-    baseurl=http://repo/centos$releasever-$basearch/RPMS.epel
-    gpgcheck=0
-    metadata_expire=1h
-    ```
-
-- rfi repo:
-
-    ```
-    [rfi]
-    name=RFI repository for local RPM builds (tested, stable): CentOS$releasever ($basearch) Base                                                                       
-    enabled=1
-    baseurl=http://repo/centos$releasever-$basearch/RPMS.rfi
-    gpgcheck=0
-    metadata_expire=5m
-    ```
-
-- package (rfi repo): puppet-agent-5.5.3
-- package: rfi-infradb-rails4-1.0-20000
-- ?? add VM to the hosts.yaml at puppet::modules/puppet/files/hostinfo/hosts.yaml
-- ?? run magic to update hieradata and infradb
-  - ?? add VM to hieradata::puppet/code/environments/production/hieradata/devices/${HOSTNAME}.yaml:
-
-      ```yaml
-      ---
-      rfi::device:
-        clusters:
-        cpu: 1 x 2.6GHz Virtual
-        disk: 1 x 20GB vm_data
-        environment: reserved
-        interfaces:
-          enp0s3:
-            macaddr:
-            ipaddr:
-            zone: internal
-        location: local
-        memory: 2G
-        name: localhost.localdomain
-        note: vdmitriev vagrant
-        organization: rfi
-        os: centos7
-        rfi-db-id:
-        services:
-        type: virtual machine
-        vendor_alias: Vagrant
-      classes:
-        - dummy_module
-      ```
-
-  - ?? add VM to the infradb: /opt/infradb4/db/sqlite.db
-- run standalone puppet: /opt/infradb4/puppet/code/environments/production/modules/rfi/files/standalone.sh
+TODO: for p39
