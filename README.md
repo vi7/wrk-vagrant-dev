@@ -35,7 +35,7 @@ command:
 ```sh
 yum -y install epel-release
 yum -y install https://repo.ius.io/ius-release-el7.rpm
-yum -y install yum-utils vim-enhanced tmux2u git222 python36 python36-pip bind-utils dig unzip traceroute
+yum -y install yum-utils vim-enhanced tmux2u git222 python36 python36-pip bind-utils dig unzip traceroute nmap
 yum -y install docker-ce docker-ce-cli containerd.io
 yum -y install kubectl
 pip install ansible==2.8.2
